@@ -1,0 +1,47 @@
+body {
+    background-color: #00BFFF; /* Sea blue background */
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* White text color */
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the content */
+    color: #000000; /* Black text color for readability */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.details {
+    margin-bottom: 20px;
+}
+.details p {
+    margin: 10px 0;
+}
+.update-button {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #1E90FF; /* Dodger blue for the button */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+}
+.update-button:hover {
+    background-color: #4682B4; /* Steel blue on hover */
+}

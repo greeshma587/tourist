@@ -1,0 +1,224 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Tourist Spoty</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,500,700&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <div class="fk_width" id="">
+            <div class="custom_menu-btn">
+           
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="package.html">Packages</a>
+                <a href="testimonial.html">Testimonial</a>
+              </div>
+            </div>
+          </div>
+          <a class="navbar-brand">
+            <img src="{% static 'images/logo.png' %}" alt="" />
+          </a>
+          
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+
+
+
+
+    <!-- slider section -->
+    <section class=" slider_section position-relative">
+      <div class="detail-box">
+        <div class="row">
+          <div class="col-md-8 col-lg-6 mx-auto">
+            <h1>
+              TOURIST SPOTY <br />
+              The World is yours to Explore
+            </h1>
+            <p>
+              “Travel becomes a strategy for accumulating photographs.” – Susan Sontag
+            </p>
+            <div>
+              <form>
+                <a href="#">
+                   ADD NOW
+                </a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="img-box">
+        <div class="play_btn">
+          <a href="#">
+            <img src="{% static 'images/play.png' %}" alt="" />
+          </a>
+        </div>
+        <img src="{% static 'images/slider-img.png' %}" class="slider-img" alt="" />
+      </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+
+
+  <!-- book section -->
+
+  <section class="book_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="heading_container">
+            <h2>
+              Add The Details of a Place That You are Visited
+            </h2>
+            <p>
+              “Share your life with others. You will have a joyful life.”
+              ― Lailah Gifty Akita
+            </p>
+          </div>
+
+          
+          <form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label for="inputAddress1">Spot Name</label>
+                <input type="text" class="form-control" id="inputAddress1" name="spotname">
+              </div>
+              <div class="form-group col-lg-4">
+                <label for="inputAddress2">Place</label>
+                <input type="text" class="form-control" id="inputAddress1" name="place">
+              </div>
+              <div class="form-group col-lg-4">
+                <label for="inputAddr">City</label>
+                <input type="text" class="form-control" id="inputAddress2" name="city">
+              </div>
+            </div>
+            <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label >State</label>
+                <input type="text" class="form-control" name="state" >
+              </div>
+              <div class="form-group col-lg-4">
+                <label for="inputPrice">Country</label>
+                <input type="text" class="form-control" name="country">
+              </div>
+              
+              
+
+
+              <div class="form-group col-lg-4">
+                <label for="inputPrice">Google View</label>
+                <input type="text" class="form-control" name="googlemap" >
+              </div>
+               <div class="form-group col-lg-4">
+
+
+
+                  <label for="image">Share an Image</label>
+                  <input type="file" id="image" name="spotimage" accept="image/*">
+
+
+              </div>
+              <div class="d-flex justify-content-center">
+                <input type="submit" class="btn " value="Register">
+                
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- end book section -->
+
+
+  <!-- package section -->
+  <section class="package_section layout_padding-top">
+    <div class="container">
+
+        
+      <div class="heading_container">
+        <h2>Visited Places</h2>
+        <table class="table table-dark">
+          <thead>
+            <tr></tr>
+              <th scope="col">Spot Name</th>
+              <th scope="col">Location</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% csrf_token %}
+            {% for item in tourist_spots %}
+            <tr>
+              <td>{{item.spotname}}</td>
+              <td>{{item.place}}</td>
+              <td><a href="{% url 'details' item.id %}">View</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+ 
+    </div>
+  </section>
+  <!-- end package section -->
+
+
+
+  <!-- footer section -->
+  <section class="footer_section ">
+    <p>
+      &copy; 2020 All Rights Reserved. Design by
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </section>
+  <!-- footer section -->
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="js/custom.js"></script>
+</body>
+
+</html>

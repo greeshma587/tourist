@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Tourist Spot</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link href="{% static 'css/viewpage.css' %}" rel="stylesheet" />
+
+</head>
+<body>
+    {% csrf_token %}
+    
+    <div class="container">
+        <h1>View Tourist Spot</h1>
+        {% if  tourist_spot.spotimage %}
+    <div class="image-container">
+        <img src="{{  tourist_spot.spotimage.url }}" alt="{{  tourist_spot.spotname }}">
+    </div>
+{% else %}
+    <p>No image available</p>
+{% endif %}
+        <div class="details">
+            <h1>{{ spot.spotname }}</h1>
+            <p><strong>Place:</strong> {{ tourist_spot.place }}</p>
+            <p><strong>City:</strong> {{ tourist_spot.city }}</p>
+            <p><strong>State:</strong> {{ tourist_spot.state }}</p>
+            <p><strong>Country:</strong> {{ tourist_spot.country }}</p>
+            <p><strong>Google Map Link:</strong> <a href="{{ tourist_spot.googlemap }}" target="_blank">{{ tourist_spot.googlemap }}</a></p>
+        </div>
+       
+    </div>
+    <br><BR><BR>
+     <!-- UPDATE section -->
+
+  <section class="book_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="heading_container">
+            <h2>
+              Edit any Details
+            </h2>
+          </div>
+
+          
+          <form action="{% url 'update' id=tourist_spot.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label for="inputAddress1">Spot Name</label>
+                <input type="text" class="form-control" id="inputAddress1" name="spotname" value="{{ tourist_spot.spotname }}">
+              </div>
+              <div class="form-group col-lg-4">
+                <label for="inputAddress2">Place</label>
+                <input type="text" class="form-control" id="inputAddress1" name="place" value="{{ tourist_spot.place }}">
+              </div>
+              <div class="form-group col-lg-4">
+                <label for="inputAddr">City</label>
+                <input type="text" class="form-control" id="inputAddress2" name="city" value="{{ tourist_spot.city }}">
+              </div>
+            </div>
+            <div class="form-row ">
+              <div class="form-group col-lg-4">
+                <label >State</label>
+                <input type="text" class="form-control" name="state" value="{{ tourist_spot.state }}" >
+              </div>
+              <div class="form-group col-lg-4">
+                <label for="inputPrice">Country</label>
+                <input type="text" class="form-control" name="country" value="{{ tourist_spot.country }}">
+              </div>
+              <div class="form-group col-lg-4">
+                
+                  
+                  
+                  <label for="image">Share an Image</label>
+                  <input type="file" id="image" name="spotimage" accept="image/*">
+    
+              
+              </div>
+
+
+              <div class="form-group col-lg-4">
+                <label for="inputPrice">Google View</label>
+                <input type="text" class="form-control" name="googlemap" value="{{ tourist_spot.googlemap }}">
+              </div>
+              <div class="d-flex justify-content-center"><br><br>
+                <input type="submit" class="btn" name="UPDATE" value="UPDATE" style="background-color: rgb(14, 128, 33);height: 35px;">
+              </div>
+            </div>
+        </form>
+
+        <form action="{% url 'delete' tourist_spot.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn" style="background-color: red; margin-left: 500px;">DELETE</button>
+        </form>
+        </div>
+      </div>
+     
+    </div>
+    
+  </section>
+
+  
+  <!-- end UPDATE section -->
+</body>
+</html>
